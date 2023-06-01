@@ -1,0 +1,23 @@
+[
+  {
+    "id": "2b7a4b06-82c5-48c4-bbc8-0ee05723d288",
+    "title": "Notion",
+    "link": "https://notion.so",
+    "description": "All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized. ",
+    "tags": [ "organization", "planning", "collaboration", "writing", "calendar" ]
+  },
+  {
+    "id": "49b2234f-1a37-435f-8fb6-2bf31874a722",
+    "title": "json-server",
+    "link": "https://github.com/typicode/json-server",
+    "description": "Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges.",
+    "tags": [ "api", "json", "schema", "node", "github", "rest" ]
+  },
+  {
+    "id": "bd1cee4c-794a-4d43-a06d-088c6e3afd01",
+    "title": "fastify",
+    "link": "https://www.fastify.io/",
+    "description": "Extremely fast and simple, low-overhead web framework for NodeJS. Supports HTTP2.",
+    "tags": [ "web", "framework", "node", "http2", "https", "localhost" ]
+  }
+]

@@ -1,0 +1,389 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Swagger Very Useful Tools to Remember - OpenAPI 3.0.3",
+    "version": "1.0.0",
+    "description": "Documentation for VUTTR (Very Useful Tools to Remember) API based on the OpenAPI 3.0 specification",
+    "contact": {
+      "name": "Marcus Vinicius",
+      "email": "marcusviniciusfabr@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "{API_BASE_URL}/api",
+      "description": "Remote serverless",
+      "variables": {
+        "API_BASE_URL": {
+          "default": "https://zqpeghy7va.execute-api.us-east-1.amazonaws.com"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "tool",
+      "description": "about Tools"
+    }
+  ],
+  "paths": {
+    "/tools": {
+      "get": {
+        "tags": [
+          "tool"
+        ],
+        "summary": "show all tools",
+        "description": "list all tools",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/toolTagParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tool"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "tool"
+        ],
+        "summary": "create a tool",
+        "description": "create a new tool",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "08b9b489-78af-4222-9ac1-eba1b501fa49",
+                    "format": "uuid",
+                    "description": "id is optional"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Notion"
+                  },
+                  "link": {
+                    "type": "string",
+                    "example": "https://notion.so",
+                    "format": "url"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized."
+                  },
+                  "tags": {
+                    "type": "array",
+                    "example": [
+                      "organization",
+                      "planning",
+                      "collaboration",
+                      "writing",
+                      "calendar"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201ToolCreated"
+          },
+          "400": {
+            "$ref": "#/components/responses/400ToolBadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/500InternalServerError"
+          }
+        }
+      }
+    },
+    "/tools/{id}": {
+      "get": {
+        "tags": [
+          "tool"
+        ],
+        "summary": "show a tool",
+        "description": "show a tool by id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/toolIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ToolOk"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ToolNotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/500InternalServerError"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "tool"
+        ],
+        "summary": "update a tool",
+        "description": "partial update of a tool by id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/toolIdParam"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "Notion"
+                  },
+                  "link": {
+                    "type": "string",
+                    "example": "https://notion.so",
+                    "format": "url"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized."
+                  },
+                  "tags": {
+                    "type": "array",
+                    "example": [
+                      "organization",
+                      "planning",
+                      "collaboration",
+                      "writing",
+                      "calendar"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ToolOk"
+          },
+          "400": {
+            "$ref": "#/components/responses/400ToolBadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/404ToolNotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/500InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "tool"
+        ],
+        "summary": "delete a tool",
+        "description": "delete a tool role by Id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/toolIdParam"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content"
+          },
+          "500": {
+            "$ref": "#/components/responses/500InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "201ToolCreated": {
+        "description": "created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Tool"
+            }
+          }
+        }
+      },
+      "200ToolOk": {
+        "description": "ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Tool"
+            }
+          }
+        }
+      },
+      "400ToolBadRequest": {
+        "description": "bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "default": 400
+                },
+                "error": {
+                  "type": "string",
+                  "example": "#title property is required ❌"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404ToolNotFound": {
+        "description": "not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "default": 404
+                },
+                "error": {
+                  "type": "string",
+                  "example": "tool not found 🔎"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404ResourceNotFound": {
+        "description": "not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "default": 404
+                },
+                "error": {
+                  "type": "string",
+                  "example": "route '{method} /api/not/found/resource' not found 🔎"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500InternalServerError": {
+        "description": "internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number",
+                  "default": 500
+                },
+                "error": {
+                  "type": "string",
+                  "default": "internal server error 💥"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "toolIdParam": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "tool id",
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "toolTagParam": {
+        "name": "tag",
+        "in": "query",
+        "required": false,
+        "description": "tool tag",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "Tool": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "847c4f08-ec9f-4b7f-b452-12d69d86efbe"
+          },
+          "title": {
+            "type": "string",
+            "example": "Notion"
+          },
+          "link": {
+            "type": "string",
+            "format": "url",
+            "example": "https://notion.so"
+          },
+          "description": {
+            "type": "string",
+            "example": "All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized."
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "organization",
+              "planning",
+              "collaboration",
+              "writing",
+              "calendar"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
