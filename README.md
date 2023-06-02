@@ -66,9 +66,7 @@ docker compose up
 
 Todos os recursos da API estão documentados com o OpenAPI 3.0
 
-Após [inserir as variáveis de ambiente](#inserir-variáveis-de-ambiente) procure no arquivo `.env.{stage}` na raiz do projeto e copie o valor da variável `AWS_API_GATEWAY_HTTP_BASE_URL`. Acesse a documentação e insira o valor no campo que possui o mesmo nome da variável.
-
-http://localhost:8080/api/docs
+Faça o [setup das variáveis de ambiente](#setup-das-variáveis-de-ambiente) e abra a documentação em http://localhost:8080/api/docs no navegador de sua preferência.
 
 ## Testes
 
@@ -110,7 +108,7 @@ npm run migrations --delete-table
 #### Inserir tools (seeds)
 
 ~~~sh
-npm run migrations --insert-tools
+npm run migrations --save-tools
 ~~~
 
 #### Deletar tools (todos)
